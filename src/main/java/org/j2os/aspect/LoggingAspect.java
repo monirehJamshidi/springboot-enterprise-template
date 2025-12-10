@@ -20,14 +20,14 @@ import java.util.UUID;
 public class LoggingAspect {
     private static final Logger logger = LoggerFactory.getLogger(LoggingAspect.class);
 
-    @Before("execution(* org.j2os..*(..))")
+    @Before("execution(* org.j2os..*(..)) && !execution(* org.springdoc..*(..))")
     public void logBefore(JoinPoint joinPoint){
         logger.info("➡️ Before: " + joinPoint.getSignature()
                 + " args: " + Arrays.toString(joinPoint.getArgs()));
     }
 
     // ====== 1) برای همه‌ی Controllerها ======
-    @Before("execution(* org.j2os.api..*(..))")
+    @Before("execution(* org.j2os.api..*(..)) && !execution(* org.springdoc..*(..))")
     public void logController(JoinPoint joinPoint) {
 
         // 1. گرفتن Correlation ID از MDC یا ساختن
@@ -43,7 +43,7 @@ public class LoggingAspect {
     }
 
     // ====== 2) زمان اجرای Serviceها (همان کدی که داشتی) ======
-    @Around("execution(* org.j2os.service..*(..))")
+    @Around("execution(* org.j2os.service..*(..)) && !execution(* org.springdoc..*(..))")
     public Object logServiceExecution(ProceedingJoinPoint joinPoint) throws Throwable {
 
         String correlationId = MDC.get("correlationId");
@@ -64,7 +64,7 @@ public class LoggingAspect {
     }
 
     // ====== 3) پاک کردن MDC بعد از هر Request ======
-    @After("execution(* org.j2os.api..*(..))")
+    @After("execution(* org.j2os.api..*(..)) && !execution(* org.springdoc..*(..))")
     public void clearMdc() {
         MDC.clear();
     }
