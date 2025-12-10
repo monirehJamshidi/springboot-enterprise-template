@@ -60,6 +60,8 @@ Spring Boot یک Tomcat داخلی دارد.
 
 ### 🔥 یک مثال ساده از پروژه Spring Boot
 
+```java
+
     @SpringBootApplication
     public class DemoApplication {
         public static void main(String[] args) {
@@ -67,7 +69,12 @@ Spring Boot یک Tomcat داخلی دارد.
         }
     }
 
+    
+```
+
 و یک RestController ساده:
+
+```java
 
     @RestController
     public class HelloController {
@@ -76,6 +83,8 @@ Spring Boot یک Tomcat داخلی دارد.
         return "Hello Monire!";
     }
     }
+
+```
 
 و تمام! پروژه آماده است.
 
@@ -154,9 +163,13 @@ Spring Boot فرایند راه‌اندازی و پیکربندی Spring را �
 #### Spring Boot:
 ساختار استاندارد دارد:
 
+```java
+
     src/main/java
     src/main/resources
     application.properties
+
+```
 
 #### 🔹 6. راه‌اندازی (Startup Time)
 #### Spring:
